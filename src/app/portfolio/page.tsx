@@ -5,12 +5,15 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function PortfolioPage() {
+  // Hem kategori filtresi hem de arama çubuğu için state (durum) yönetimi
   const [activeFilter, setActiveFilter] = useState('Tümü');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const projects = [
     {
       id: 1,
       title: "Focus Hero",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "Oyunlaştırma (Gamification) odaklı verimlilik ve odaklanma mobil uygulamamız. Kullanıcıların zaman yönetimini eğlenceli hale getiriyoruz.",
       icon: "🎯",
@@ -21,6 +24,7 @@ export default function PortfolioPage() {
     {
       id: 2,
       title: "Huda: Prayer & AI",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "Namaz vakitleri, Kur'an-ı Kerim ve entegre Yapay Zeka (LLM) destekli kapsamlı dijital dini yaşam asistanı uygulamamız.",
       icon: "🕌",
@@ -31,6 +35,7 @@ export default function PortfolioPage() {
     {
       id: 3,
       title: "Utilify Ultimate Toolkit",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "İçinde Görsel Editörü, PDF Stüdyosu, Ses Çevirisi ve Akıllı OCR Tarayıcı barındıran devasa ve modüler araç kutusu projemiz.",
       icon: "🛠️",
@@ -41,6 +46,7 @@ export default function PortfolioPage() {
     {
       id: 4,
       title: "UniLife Pocket Assistant",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "Üniversite öğrencileri için kampüs hayatını kolaylaştıran, pratik çözümler sunan dijital yaşam asistanı mobil uygulamamız.",
       icon: "🎓",
@@ -51,6 +57,7 @@ export default function PortfolioPage() {
     {
       id: 5,
       title: "Hayat Pusulası",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "Kullanıcıların günlük yaşam rutinlerini, hedeflerini ve kişisel gelişim süreçlerini planlı takip etmelerini sağlayan mobil rehber uygulamamız.",
       icon: "🧭",
@@ -61,6 +68,7 @@ export default function PortfolioPage() {
     {
       id: 6,
       title: "Mega Game Hub",
+      developer: "Hazım Ablak",
       category: "Mobil Uygulama",
       description: "Hypercasual oyun severler için tasarladığımız, eğlenceli ve dinamik mobil oyunları bir araya getiren yeni nesil oyun merkezi projemiz.",
       icon: "🎮",
@@ -71,6 +79,7 @@ export default function PortfolioPage() {
     {
       id: 7,
       title: "Kampanya Avcısı Platformu",
+      developer: "Hazım Ablak",
       category: "Web",
       description: "Yerel fırsatları, indirimleri ve anlık kampanyaları kullanıcılarla buluşturan dinamik yerel konum tabanlı fırsat platformu yazılımımız.",
       icon: "🏷️",
@@ -81,6 +90,7 @@ export default function PortfolioPage() {
     {
       id: 8,
       title: "Kişisel Portfolyo Platformu",
+      developer: "Hazım Ablak",
       category: "Web",
       description: "Modern tasarım trendlerini yansıtan, yeteneklerimizi ve projelerimizi jilet gibi sergileyen özgün portfolyo platformumuz.",
       icon: "💼",
@@ -90,7 +100,8 @@ export default function PortfolioPage() {
     },
     {
       id: 9,
-      title: "Türkiye Gezi Rehberi Sitemiz",
+      title: "Türkiye Gezi Rehberi",
+      developer: "Hazım Ablak",
       category: "Web",
       description: "Türkiye'nin tarihi ve turistik zenginliklerini kullanıcı dostu bir arayüzle keşfetmeyi sağlayan modern gezi rehberi web sitemiz.",
       icon: "🗺️",
@@ -100,7 +111,8 @@ export default function PortfolioPage() {
     },
     {
       id: 10,
-      title: "Bayırbucak Kültürel Miras Platformu",
+      title: "Bayırbucak Kültürel Miras",
+      developer: "Hazım Ablak",
       category: "Web",
       description: "Kültürel mirası ve tarihi değerleri dijital dünyada yaşatmak, korumak ve geniş kitlelere ulaştırmak amacıyla inşa ettiğimiz web platformumuz.",
       icon: "🏛️",
@@ -110,9 +122,10 @@ export default function PortfolioPage() {
     },
     {
       id: 11,
-      title: "Windows Organik Yükleme Animasyonu",
+      title: "Windows Yükleme Animasyonu",
+      developer: "Hazım Ablak",
       category: "Araçlar & Animasyon",
-      description: "Mekanik dönüşler yerine organik 'kümeleşme ve dağılma' hissi veren easeInOutCubic algoritmalı, pürüzsüz takip kuyruklu asenkron faz gecikmeli ve dinamik saydamlık kontrollü spinner projemiz.",
+      description: "Organik 'kümeleşme ve dağılma' hissi veren easeInOutCubic algoritmalı, pürüzsüz takip kuyruklu asenkron faz gecikmeli animasyon projemiz.",
       icon: "⏳",
       tags: ["UI Animation", "Easing Function", "Algorithms"],
       link: "https://github.com/hazimablak/windows-loading-spinner",
@@ -120,18 +133,26 @@ export default function PortfolioPage() {
     }
   ];
 
-  const filters = ['Tümü', 'Mobil Uygulama', 'Web', 'Araçlar & Animasyon'];
+  const filters = ['Tümü', 'Mobil Uygulama', 'Web', 'Araçlar & Animasyon', 'Video Edit', 'Oyun', 'Diğer'];
 
-  const filteredProjects = activeFilter === 'Tümü' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  // 🔥 Arama ve Filtreleme Mantığı
+  const filteredProjects = projects.filter(project => {
+    // 1. Kategori Kontrolü
+    const matchesCategory = activeFilter === 'Tümü' || project.category === activeFilter;
+    
+    // 2. Arama Kontrolü (Proje adı VEYA Geliştirici adında arar, küçük/büyük harf duyarsız)
+    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          project.developer.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <main className="min-h-screen bg-brandLight">
       <Navbar />
       
       {/* Üst Başlık Bölümü */}
-      <section className="pt-24 pb-12 text-center container mx-auto px-6">
+      <section className="pt-24 pb-8 text-center container mx-auto px-6">
         <div className="flex items-center justify-center space-x-2 text-brandOrange font-bold text-sm tracking-wider uppercase mb-4">
           <span className="w-6 h-[2px] bg-brandOrange"></span>
           <span>PORTFOLYOMUZ</span>
@@ -145,11 +166,25 @@ export default function PortfolioPage() {
         </p>
       </section>
 
-      {/* Projeler ve Filtreleme */}
+      {/* Arama, Filtreleme ve Projeler */}
       <section className="pb-24 container mx-auto px-6 max-w-6xl">
         
+        {/* Arama Çubuğu */}
+        <div className="w-full max-w-xl mx-auto mb-10 relative">
+          <svg className="w-5 h-5 text-gray-400 absolute left-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input 
+            type="text" 
+            placeholder="Proje veya geliştirici ara..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-2xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-brandOrange/50 transition text-gray-700"
+          />
+        </div>
+
         {/* Filtre Butonları */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
           {filters.map((filter) => (
             <button 
               key={filter}
@@ -165,14 +200,22 @@ export default function PortfolioPage() {
           ))}
         </div>
 
+        {/* Sonuç Bilgisi */}
+        <div className="text-center text-gray-400 text-sm font-medium mb-8">
+          {filteredProjects.length} uygulama bulundu
+        </div>
+
         {/* Proje Grid Yapısı */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
               
               {/* İkon ve Statü Alanı */}
-              <div className="w-full h-48 bg-gray-50 rounded-2xl mb-6 flex flex-col items-center justify-center relative overflow-hidden group-hover:bg-orange-50 transition-colors duration-300">
-                <span className="absolute top-4 right-4 px-3 py-1 bg-white text-xs font-bold rounded-full text-brandDark shadow-sm border border-gray-100">
+              <div className="w-full h-48 bg-gray-50 rounded-2xl mb-6 flex flex-col items-center justify-center relative overflow-hidden group-hover:bg-orange-50 transition-colors duration-300 border border-gray-100/50">
+                <span className="absolute top-4 right-4 px-3 py-1 bg-white text-xs font-bold rounded-full text-brandDark shadow-sm border border-gray-100 flex items-center gap-1">
+                  {project.status === "Yayında" && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
+                  {project.status === "Canlıda" && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
+                  {project.status === "Açık Kaynak" && <span className="w-2 h-2 rounded-full bg-brandOrange"></span>}
                   {project.status}
                 </span>
                 <div className="text-7xl transform group-hover:scale-110 transition-transform duration-300">
@@ -182,16 +225,26 @@ export default function PortfolioPage() {
 
               {/* İçerik */}
               <div className="flex-grow">
-                <span className="text-brandOrange text-xs font-bold uppercase tracking-wider mb-2 block">
-                  {project.category}
-                </span>
-                <h3 className="text-xl font-bold text-brandDark mb-3">{project.title}</h3>
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-brandOrange text-xs font-bold uppercase tracking-wider block">
+                    {project.category}
+                  </span>
+                </div>
+                
+                <h3 className="text-xl font-bold text-brandDark mb-1">{project.title}</h3>
+                
+                {/* Geliştirici İsmi (Yeni Eklendi) */}
+                <div className="flex items-center text-gray-500 text-sm mb-4 font-medium">
+                  <svg className="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                  {project.developer}
+                </div>
+
                 <p className="text-gray-500 text-sm leading-relaxed mb-6">
                   {project.description}
                 </p>
               </div>
 
-              {/* Etiketler ve Link Düzenlemesi */}
+              {/* Etiketler ve Link */}
               <div className="border-t border-gray-100 pt-4 mt-auto">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, index) => (
@@ -213,6 +266,15 @@ export default function PortfolioPage() {
               </div>
             </div>
           ))}
+
+          {/* Eğer arama sonucu boş dönerse */}
+          {filteredProjects.length === 0 && (
+            <div className="col-span-full py-12 text-center">
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="text-xl font-bold text-brandDark mb-2">Proje Bulunamadı</h3>
+              <p className="text-gray-500">Aradığınız kriterlere uygun bir proje veya geliştirici eşleşmedi.</p>
+            </div>
+          )}
         </div>
 
         {/* Kurumsal Alt Kutu */}
