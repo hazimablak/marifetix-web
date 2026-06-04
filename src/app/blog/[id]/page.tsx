@@ -10,7 +10,6 @@ export default function BlogPostDetail() {
   const params = useParams();
   const id = parseInt(params.id as string);
 
-  // 5 Adet Dolu Dolu Uzun Makale Veritabanı
   const postsDatabase: Record<number, any> = {
     1: {
       title: "Next.js 14 ile Yüksek Performanslı Web Geliştirme",
@@ -146,7 +145,8 @@ export default function BlogPostDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    // 🔥 Koyu Mavi Gece Arka Planı eklendi (slate-950)
+    <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       <Navbar />
 
       <section className={`w-full pt-32 pb-24 bg-gradient-to-r ${post.bgGradient} relative overflow-hidden text-white`}>
@@ -185,18 +185,18 @@ export default function BlogPostDetail() {
       </section>
 
       <section className="container mx-auto px-6 max-w-3xl py-16">
-        <div className="text-gray-700 text-lg md:text-xl leading-relaxed space-y-6">
+        <div className="text-gray-700 dark:text-slate-300 text-lg md:text-xl leading-relaxed space-y-6 transition-colors duration-300">
           
           {post.content.split('\n').map((paragraph: string, index: number) => {
             const p = paragraph.trim();
             if (!p) return null;
             
             if (p.startsWith('## ')) {
-              return <h2 key={index} className="text-2xl md:text-3xl font-extrabold text-gray-900 mt-12 mb-4 pt-4 border-b border-gray-100 pb-2">{p.replace('## ', '')}</h2>;
+              return <h2 key={index} className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mt-12 mb-4 pt-4 border-b border-gray-100 dark:border-slate-800 pb-2 transition-colors">{p.replace('## ', '')}</h2>;
             }
             if (p.startsWith('> ')) {
               return (
-                <blockquote key={index} className="border-l-4 border-brandOrange pl-6 py-3 my-8 bg-orange-50/40 rounded-r-2xl italic text-gray-600 font-medium">
+                <blockquote key={index} className="border-l-4 border-brandOrange pl-6 py-3 my-8 bg-orange-50/40 dark:bg-slate-900 rounded-r-2xl italic text-gray-600 dark:text-slate-400 font-medium transition-colors">
                   {p.replace('> ', '')}
                 </blockquote>
               );
@@ -207,16 +207,16 @@ export default function BlogPostDetail() {
         </div>
 
         {post.references && post.references.length > 0 && (
-          <div className="mt-16 pt-8 border-t border-gray-100">
-            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="mt-16 pt-8 border-t border-gray-100 dark:border-slate-800 transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 transition-colors">
               <svg className="w-5 h-5 text-brandOrange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
               Kaynakça ve Linkler
             </h3>
             <ul className="space-y-3">
               {post.references.map((ref: any, idx: number) => (
                 <li key={idx}>
-                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-brandOrange transition-colors duration-75 flex items-center gap-2 text-sm font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                  <a href={ref.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-slate-400 hover:text-brandOrange dark:hover:text-brandOrange transition-colors duration-75 flex items-center gap-2 text-sm font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-slate-700 transition-colors"></span>
                     {ref.name}
                   </a>
                 </li>

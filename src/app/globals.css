@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* 🔥 Tailwind v4 Gece Modu (Dark Mode) Tetikleyicisi */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-brandOrange: #ff6b35;
   --color-brandDark: #1a1a1a;

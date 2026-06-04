@@ -8,8 +8,8 @@ const Services = () => {
       description: "Next.js ve React mimarisiyle, SEO uyumlu, ışık hızında çalışan kurumsal web siteleri ve gelişmiş yönetim panelleri inşa ediyoruz.",
       icon: "🌐",
       colSpan: "md:col-span-2 lg:col-span-2",
-      bgStyle: "bg-brandDark text-white",
-      textStyle: "text-gray-300"
+      bgStyle: "bg-white dark:bg-gray-900 text-brandDark dark:text-white border border-gray-100 dark:border-gray-800",
+      textStyle: "text-gray-500 dark:text-gray-400"
     },
     {
       id: 2,
@@ -17,8 +17,8 @@ const Services = () => {
       description: "Çapraz platform (Flutter) ve native çözümlerle, her ekranda kusursuz çalışan kullanıcı dostu mobil deneyimler geliştiriyoruz.",
       icon: "📱",
       colSpan: "md:col-span-1 lg:col-span-1",
-      bgStyle: "bg-brandOrange text-white",
-      textStyle: "text-white/80"
+      bgStyle: "bg-white dark:bg-gray-900 text-brandDark dark:text-white border border-gray-100 dark:border-gray-800",
+      textStyle: "text-gray-500 dark:text-gray-400"
     },
     {
       id: 3,
@@ -26,8 +26,8 @@ const Services = () => {
       description: "Makine öğrenmesi modelleri ve akıllı sınıflandırma algoritmalarıyla işletmenize vizyoner bir zeka katıyoruz.",
       icon: "🧠",
       colSpan: "md:col-span-1 lg:col-span-1",
-      bgStyle: "bg-white text-brandDark border border-gray-100",
-      textStyle: "text-gray-500"
+      bgStyle: "bg-white dark:bg-gray-900 text-brandDark dark:text-white border border-gray-100 dark:border-gray-800",
+      textStyle: "text-gray-500 dark:text-gray-400"
     },
     {
       id: 4,
@@ -35,8 +35,8 @@ const Services = () => {
       description: "Tekrarlayan işleri sıfırlayan, SMS ve mail entegrasyonlu özel yazılım otomasyonlarıyla saatler kazanmanızı sağlıyoruz.",
       icon: "⚙️",
       colSpan: "md:col-span-1 lg:col-span-1",
-      bgStyle: "bg-white text-brandDark border border-gray-100",
-      textStyle: "text-gray-500"
+      bgStyle: "bg-white dark:bg-gray-900 text-brandDark dark:text-white border border-gray-100 dark:border-gray-800",
+      textStyle: "text-gray-500 dark:text-gray-400"
     },
     {
       id: 5,
@@ -44,13 +44,13 @@ const Services = () => {
       description: "Markanızın dijital dünyadaki hikayesini, akılda kalıcı, profesyonel kurgulanmış reklam ve tanıtım filmleriyle anlatıyoruz.",
       icon: "🎬",
       colSpan: "md:col-span-1 lg:col-span-1",
-      bgStyle: "bg-white text-brandDark border border-gray-100",
-      textStyle: "text-gray-500"
+      bgStyle: "bg-white dark:bg-gray-900 text-brandDark dark:text-white border border-gray-100 dark:border-gray-800",
+      textStyle: "text-gray-500 dark:text-gray-400"
     }
   ];
 
   return (
-    <section id="about" className="w-full py-24 bg-brandLight">
+    <section id="services" className="w-full py-24 bg-brandLight dark:bg-[#0a0a0a] transition-colors duration-300">
       <div className="container mx-auto px-6">
         
         <div className="flex flex-col items-center text-center mb-16">
@@ -59,10 +59,10 @@ const Services = () => {
             <span>HİZMETLERİMİZ</span>
             <span className="w-6 h-[2px] bg-brandOrange"></span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-brandDark mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-brandDark dark:text-white mb-4 transition-colors">
             Neler Yapıyoruz?
           </h2>
-          <p className="text-gray-500 max-w-2xl text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl text-lg transition-colors">
             Fikrinizi alıyor, kodluyor, tasarlıyor ve dijital dünyanın zirvesine taşıyoruz.
           </p>
         </div>
@@ -74,7 +74,7 @@ const Services = () => {
                 {service.icon}
               </div>
               <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-              <p className={`leading-relaxed ${service.textStyle}`}>
+              <p className={`leading-relaxed ${service.textStyle} transition-colors`}>
                 {service.description}
               </p>
             </div>
